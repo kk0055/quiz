@@ -14,6 +14,14 @@ export default {
   components: {
     Header,
     QuestionBox
+  },
+  mounted: function() {
+    fetch('https://opentdb.com/api.php?amount=20&category=31&difficulty=medium&type=multiple', {
+      method: 'get'
+    })
+    .then((response) => {
+      console.log(response.json())
+    })
   }
 }
 </script>

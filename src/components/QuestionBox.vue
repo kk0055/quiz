@@ -3,31 +3,58 @@
     <h1>Question Box</h1>
     {{ currentQuestion.question }}
 
- <hr clss="my-4">
-    <b-button class="btnSubmit">Submit</b-button>
-    <b-button class="btnNext">Next</b-button>
+  
+    <hr>
+
+    <p 
+    v-for="(answer, index) in answers" 
+    :key="index"
+    @click="selectAnswer(index)"
+    >
+    {{ answer }}
+    </p>
+
+ 
+
+    <b-button class="btn">Submit</b-button>
+    <b-button class="btn" @click="next">Next</b-button>
+    
   </div>
 </template>
 <script>
 export default {
   props: {
-    currentQuestion:Object
+    currentQuestion: Object,
+    next:Function
+  },
+  computed: {
+    answers() {
+      let answers = [...this.currentQuestion.incorrect_answers]
+       answers.push(this.currentQuestion.correct_answer)
+       return answers
+    }
+  },
+  methods: {
+    selectAnswer(index) {
+      console.log(index)
+    }
   }
+  
 }
 </script>
 
 <style scoped>
 
-.btnSubmit {
+.btn {
   background-color: white;
   color: black;
-  margin-right: 10px;
+  margin:10px 10px;
 }
 
-.btnNext {
-  background-color: white;
-  color: black;
- 
+.btn:focus {
+ outline:none;
+ background-color: white;
+ color: black;
 }
   
 </style>

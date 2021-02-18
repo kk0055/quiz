@@ -2,7 +2,9 @@
   <div id="app">
     <Header></Header>
     <question-box
+     v-if="questions.length"
      :currentQuestion="questions[index]"
+     :next="next"
     />
   </div>
 </template>
@@ -21,6 +23,11 @@ export default {
     return {
    questions: [],
    index: 0
+    }
+  },
+  methods: {
+    next (){
+       this.index++
     }
   },
   mounted: function() {

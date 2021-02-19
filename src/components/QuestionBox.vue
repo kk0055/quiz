@@ -19,6 +19,7 @@
 
     <b-button class="btn"
     v-on:click="submitAnswer"
+    :disabled="selectedIndex === null"
     >Submit</b-button>
     <b-button class="btn" @click="next">Next</b-button>
     
@@ -36,6 +37,7 @@ export default {
   data: function() {
     return {
       selectedIndex: null,
+      correctIndex:null,
       shuffledAnswers:[]
         }
   },

@@ -37,12 +37,14 @@ export default {
     },
       increment(isCorrect) {
    if (isCorrect) {
+     //正答数をプラス
       this.numCorrect++
    }
-    this.numTotal++
+    //回答数をプラス
+      this.numTotal++
   },
   },
-
+  //Fetch API
   mounted: function() {
     fetch('https://opentdb.com/api.php?amount=20&category=31&difficulty=medium&type=multiple', {
       method: 'get'

@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <Header
+    :numCorrect="numCorrect"
+    :numTotal="numTotal"
+    ></Header>
     <question-box
      v-if="questions.length"
      :currentQuestion="questions[index]"
      :next="next"
+     :increment="increment"
     />
   </div>
 </template>
@@ -22,14 +26,23 @@ export default {
   data() {
     return {
    questions: [],
-   index: 0
+   index: 0,
+   numCorrect:0,
+   numTotal:0
     }
   },
   methods: {
     next (){
        this.index++
-    }
+    },
+      increment(isCorrect) {
+   if (isCorrect) {
+      this.numCorrect++
+   }
+    this.numTotal++
   },
+  },
+
   mounted: function() {
     fetch('https://opentdb.com/api.php?amount=20&category=31&difficulty=medium&type=multiple', {
       method: 'get'

@@ -17,7 +17,9 @@
 </div>
  
 
-    <b-button class="btn">Submit</b-button>
+    <b-button class="btn"
+    v-on:click="submitAnswer"
+    >Submit</b-button>
     <b-button class="btn" @click="next">Next</b-button>
     
   </div>
@@ -28,12 +30,13 @@ import _ from 'lodash'
 export default {
   props: {
     currentQuestion: Object,
-    next:Function
+    next:Function,
+    increment:Function
   },
   data: function() {
     return {
       selectedIndex: null,
-      sshuffledAnswers:[]
+      shuffledAnswers:[]
         }
   },
   computed: {
@@ -44,21 +47,35 @@ export default {
     }
   },
   watch: {
-    currentQuestion() {
-      this.selectedIndex = null
-      this.shuffleAnswers()
+    currentQuestion:  {
+      immediate:true,
+      handler() {
+        this.selectedIndex = null
+        this.shuffleAnswers()
+      }
+
     }
+    // () {
+    //   this.selectedIndex = null
+    //   this.shuffleAnswers()
+    // }
   },
   methods: {
     selectAnswer(index) {
       this.selectedIndex = index
       console.log(index)
     },
+    submitAnswer() {
+      let isCorrect = false
+      if (this.selectedIndex === this.correctIndex) {
+        isCorrect = true
+      }
+      this.increment(isCorrect)
+    },
     shuffleAnswers() {
        let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
-       this.sshuffledAnswers = _.shuffle(answers)
+       this.shuffledAnswers = _.shuffle(answers)
     }
-    
   }
   
 }

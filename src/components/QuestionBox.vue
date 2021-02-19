@@ -23,6 +23,8 @@
   </div>
 </template>
 <script>
+import _ from 'lodash'
+
 export default {
   props: {
     currentQuestion: Object,
@@ -31,6 +33,7 @@ export default {
   data: function() {
     return {
       selectedIndex: null,
+      sshuffledAnswers:[]
         }
   },
   computed: {
@@ -51,9 +54,11 @@ export default {
       this.selectedIndex = index
       console.log(index)
     },
-    // shuffleAnswers() {
-    //    let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
-    // }
+    shuffleAnswers() {
+       let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
+       this.sshuffledAnswers = _.shuffle(answers)
+    }
+    
   }
   
 }
@@ -76,6 +81,7 @@ export default {
   width: 80%;
   margin: 0 auto;
   max-width: 500px;
+
 }
 
 p:hover {
@@ -89,6 +95,6 @@ p:hover {
   background-color: rgb(50, 245, 50);
 }
 .incorrect {
-    background-color:red;
+  background-color:red;
 }
 </style>

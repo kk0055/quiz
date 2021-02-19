@@ -12,14 +12,14 @@
     @click="selectAnswer(index)"
     :class="answerClass(index)"
     >
-    {{ answer }}
+  {{ answer }}
     </p>
 </div>
  
 
     <b-button class="btn"
     v-on:click="submitAnswer"
-    :disabled="selectedIndex === null || answered"
+    :disabled="selectedIndex === null || answered "
     >
     Submit</b-button>
     <b-button class="btn" @click="next">Next</b-button>
@@ -81,6 +81,7 @@ export default {
        this.shuffledAnswers = _.shuffle(answers)
        this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
     },
+    //選択された回答が正しいかどうかでクラス分け
     answerClass(index) {
       let answerClass = ''
 
